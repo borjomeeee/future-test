@@ -1,7 +1,7 @@
 import React from "react";
+
 import UtilsPanelComponent from "./components/UtilsPanel.component";
 import TableComponent from "./components/Table.component";
-import TableSubDataComponent from "./components/TableSubData.component";
 
 function App() {
   return (
@@ -17,8 +17,6 @@ function App() {
       <UtilsPanelComponent />
 
       <TableComponent />
-
-      <TableSubDataComponent />
     </div>
   );
 }

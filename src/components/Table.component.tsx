@@ -1,6 +1,8 @@
 import React from "react";
+
 import TableSearchBarComponent from "./TableSearchBar.component";
 import TablePaginatorComponent from "./TablePaginator.component";
+import TableSubDataComponent from "./TableSubData.component";
 
 const TableComponent = () => {
   return (
@@ -29,6 +31,8 @@ const TableComponent = () => {
             </tr>
           </tbody>
         </table>
+
+        <TableSubDataComponent />
 
         <TablePaginatorComponent />
       </div>
