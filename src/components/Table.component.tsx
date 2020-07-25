@@ -3,11 +3,18 @@ import React, { useContext } from "react";
 import TableSearchBarComponent from "./TableSearchBar.component";
 import TablePaginatorComponent from "./TablePaginator.component";
 import TableSubDataComponent from "./TableSubData.component";
+import TableItemComponent from "./TableItem.component";
 
 import AppContext from "../context";
 
+import { ITableItem } from "../models/TableItem.model";
+
 const TableComponent = () => {
-  const { isLoading } = useContext(AppContext);
+  const { isLoading, tableItems } = useContext(AppContext);
+
+  const renderTableItem = (item: ITableItem) => {
+    return <TableItemComponent {...item} />;
+  };
 
   return (
     <div className="table">
@@ -37,16 +44,7 @@ const TableComponent = () => {
               <th scope="col">phone</th>
             </tr>
           </thead>
-          <tbody>
-            {/** FOR EXAMPLE (REMOVE AFTER) */}
-            <tr>
-              <th scope="row">101</th>
-              <td>Sue</td>
-              <td>Corson</td>
-              <td>DWhalley@in.gov</td>
-              <td>(612)211-6296</td>
-            </tr>
-          </tbody>
+          <tbody>{tableItems.map(renderTableItem)}</tbody>
         </table>
       </div>
 

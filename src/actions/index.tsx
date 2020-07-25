@@ -39,7 +39,6 @@ export const loadData = (url: string): IAsyncAction => async (
               description: item["description"] || "",
             } as ITableItem)
         );
-        console.log(validData);
         dispatch(loadDataSuccessAction(validData));
       } else {
         dispatch(loadDataFailedAction("Ошибка обработки данных с сервера"));
