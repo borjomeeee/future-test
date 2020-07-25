@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import LoadingContext from "../context";
 
 const TableSearchBarComponent = () => {
+  const { isLoading } = useContext(LoadingContext);
   return (
     <div className="table__search-bar">
       <div className="search-bar__container">
@@ -13,7 +16,11 @@ const TableSearchBarComponent = () => {
           />
         </div>
         <div className="search-bar__button">
-          <button type="button" className="btn btn-success">
+          <button
+            type="button"
+            className="btn btn-success"
+            disabled={isLoading}
+          >
             Найти
           </button>
         </div>
