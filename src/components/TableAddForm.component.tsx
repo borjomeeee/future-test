@@ -9,7 +9,7 @@ export interface ITableAddFormComponent {
   onSubmit: (newItem: ITableItem) => void;
 }
 
-const TableAddFormComponent = ({}: ITableAddFormComponent) => {
+const TableAddFormComponent = ({ onSubmit }: ITableAddFormComponent) => {
   const [
     idInputValue,
     idInputError,

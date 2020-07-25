@@ -31,6 +31,7 @@ const TableComponent = () => {
 
     setFilterCol(null);
     setCurrItem(null);
+    setCurrPage(0);
   }, [tableItems]);
 
   const onClickTableItem = (item: ITableItem) => {
@@ -98,13 +99,14 @@ const TableComponent = () => {
         onAddItem={onToggleVisibleAddForm}
       />
 
-      <div
-        className={`table__container ${
-          isLoading ? "table__container_loading" : ""
-        }`}
-      >
+      <div className="table__container">
         {isLoading && <TableLoadingComponent />}
-        <table className="table__content">
+
+        <table
+          className={`table__content ${
+            isLoading ? "table__content_loading" : ""
+          }`}
+        >
           <TableHeadComponent
             onClick={onTableColLabelClick}
             filteredCol={filterCol}

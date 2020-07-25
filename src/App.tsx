@@ -42,13 +42,6 @@ function App() {
 
   const { isLoading, tableItems, error } = store;
 
-  useEffect(() => {
-    if (error.length > 0) {
-      alert(error);
-      clearError();
-    }
-  }, [error]);
-
   const loadBigData = () => {
     dispatch(
       ACTIONS.loadData(
@@ -68,6 +61,13 @@ function App() {
   const clearError = () => {
     dispatch(ACTIONS.clearErrorAction());
   };
+
+  useEffect(() => {
+    if (error.length > 0) {
+      alert(error);
+      clearError();
+    }
+  }, [error]);
 
   return (
     <AppContext.Provider

@@ -10,7 +10,6 @@ const LabeledInputComponent = ({
   label,
   ...props
 }: React.ComponentProps<"input"> & ILabeledInputComponent) => {
-  console.log(error);
   return (
     <>
       <label htmlFor="inputFirstName">{label}</label>
