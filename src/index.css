@@ -115,14 +115,14 @@
   border-radius: 5px;
 }
 
-.pagination .pagination__page-link_active,
-.pagination .pagination__page-link:hover {
+.pagination:not(.pagination-disabled) .pagination__page-link_active,
+.pagination:not(.pagination-disabled) .pagination__page-link:hover {
   background-color: #007bff;
   border-color: #007bff;
 }
 
-.pagination .pagination__page-link_active a,
-.pagination .pagination__page-link:hover a {
+.pagination:not(.pagination-disabled) .pagination__page-link_active a,
+.pagination:not(.pagination-disabled) .pagination__page-link:hover a {
   color: #fff;
 }
 

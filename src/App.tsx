@@ -1,27 +1,24 @@
 import React, { useState } from "react";
 
+import AppHeaderComponent from "./components/AppHeader.component";
 import UtilsPanelComponent from "./components/UtilsPanel.component";
 import TableComponent from "./components/Table.component";
 
 import LoadingContext from "./context";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
       <div className="content">
-        <nav className="navbar navbar-dark bg-primary">
-          <div className="container">
-            <span className="navbar-brand mb-0 h1">
-              Future - тестовое задание
-            </span>
-          </div>
-        </nav>
+        <AppHeaderComponent />
 
-        <UtilsPanelComponent />
+        <div className="container">
+          <UtilsPanelComponent />
 
-        <TableComponent />
+          <TableComponent />
+        </div>
       </div>
     </LoadingContext.Provider>
   );
