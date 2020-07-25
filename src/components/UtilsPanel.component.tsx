@@ -11,7 +11,7 @@ const UtilsPanelComponent = () => {
         <div className="buttons__item-container">
           <button
             type="button"
-            className="btn btn-primary"
+            className="buttons__item btn btn-primary"
             onClick={loadSmallData}
             disabled={isLoading}
           >
@@ -21,7 +21,7 @@ const UtilsPanelComponent = () => {
         <div className="buttons__item-container">
           <button
             type="button"
-            className="btn btn-primary"
+            className="buttons__item btn btn-primary"
             onClick={loadBigData}
             disabled={isLoading}
           >

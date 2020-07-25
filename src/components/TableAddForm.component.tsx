@@ -54,12 +54,12 @@ const TableAddFormComponent = ({}: ITableAddFormComponent) => {
   };
 
   return (
-    <div className="form">
+    <div className="table__form form">
       <div className="form-row">
-        <div className="form-group col-md-2">
+        <div className="form__item form-group col-md-2">
           <LabeledInputComponent
             type="text"
-            className="form-control"
+            className="form__input form-control"
             id="inputId"
             placeholder="Id"
             value={idInputValue}
@@ -68,10 +68,10 @@ const TableAddFormComponent = ({}: ITableAddFormComponent) => {
             label="Id"
           />
         </div>
-        <div className="form-group col-md-5">
+        <div className="form__item form-group col-md-5">
           <LabeledInputComponent
             type="text"
-            className="form-control"
+            className="form__input form-control"
             id="inputFirstName"
             placeholder="FirstName"
             error={firstNameInputError}
@@ -81,10 +81,10 @@ const TableAddFormComponent = ({}: ITableAddFormComponent) => {
           />
         </div>
 
-        <div className="form-group col-md-5">
+        <div className="form__item form-group col-md-5">
           <LabeledInputComponent
             type="text"
-            className="form-control"
+            className="form__input form-control"
             id="inputLastName"
             placeholder="LastName"
             value={lastNameInputValue}
@@ -96,10 +96,10 @@ const TableAddFormComponent = ({}: ITableAddFormComponent) => {
       </div>
 
       <div className="form-row">
-        <div className="form-group col-md-6">
+        <div className="form__item form-group col-md-6">
           <LabeledInputComponent
             type="email"
-            className="form-control"
+            className="form__input form-control"
             id="inputEmail"
             placeholder="Email"
             value={emailInputValue}
@@ -109,10 +109,10 @@ const TableAddFormComponent = ({}: ITableAddFormComponent) => {
           />
         </div>
 
-        <div className="form-group col-md-6">
+        <div className="form__item form-group col-md-6">
           <LabeledInputComponent
             type="text"
-            className="form-control"
+            className="form__input form-control"
             id="inputPhone"
             placeholder="Phone"
             value={phoneInputValue}
@@ -123,7 +123,10 @@ const TableAddFormComponent = ({}: ITableAddFormComponent) => {
         </div>
       </div>
 
-      <button className="btn btn-primary mt-4" onClick={onSubmitAddItem}>
+      <button
+        className="form__submit btn btn-primary mt-4"
+        onClick={onSubmitAddItem}
+      >
         Добавить
       </button>
     </div>

@@ -20,13 +20,13 @@
   align-items: center;
 }
 
-.table-loading .table__container {
-  filter: blur(2px);
-}
-
 .table__container {
   position: relative;
   margin-top: 30px;
+}
+
+.table__container_loading {
+  filter: blur(2px);
 }
 
 .table__content {

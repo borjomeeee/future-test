@@ -100,7 +100,7 @@ const TableComponent = () => {
 
       <div
         className={`table__container ${
-          isLoading ? "table__container-loading" : ""
+          isLoading ? "table__container_loading" : ""
         }`}
       >
         {isLoading && <TableLoadingComponent />}

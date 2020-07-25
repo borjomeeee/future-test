@@ -18,7 +18,7 @@ const TablePaginatorComponent = ({
 }: ITablePaginatorComponent) => {
   const { isLoading } = useContext(AppContext);
   return (
-    <div className="table__paginator">
+    <div className="table__pagination pagination">
       <ReactPaginate
         pageCount={numPages}
         initialPage={currPage}
@@ -34,12 +34,12 @@ const TablePaginatorComponent = ({
         marginPagesDisplayed={3}
         pageRangeDisplayed={7}
         pageClassName={"pagination__page-link"}
-        containerClassName={`pagination ${
-          isLoading ? "pagination-disabled" : ""
+        containerClassName={`pagination__container ${
+          isLoading ? "pagination__container_disabled" : ""
         }`}
         activeClassName={"pagination__page-link_active"}
         disableInitialCallback={isLoading}
-        disabledClassName={"pagination__button-disabled"}
+        disabledClassName={"pagination__button_disabled"}
       />
     </div>
   );

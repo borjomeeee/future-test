@@ -18,7 +18,7 @@ const TableItemComponent = ({
 }: ITableItem & ITableItemComponent) => {
   return (
     <tr
-      className={`table__col ${isSelected ? "table__col-selected" : ""}`}
+      className={`table__col ${isSelected ? "table__col_selected" : ""}`}
       onClick={onClickItem}
     >
       <th scope="row">{id || "-"}</th>
