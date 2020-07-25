@@ -58,6 +58,14 @@ const TableComponent = () => {
     }
   };
 
+  const onSearchSubstrOnRow = (str: string) => {
+    setCurrItems(
+      tableItems.filter((item: ITableItem) =>
+        cols.some((col: ITableCol) => item[col.key].toString().startsWith(str))
+      )
+    );
+  };
+
   const renderTableCol = (col: ITableCol) => {
     return (
       <th
@@ -77,7 +85,7 @@ const TableComponent = () => {
 
   return (
     <div className="table">
-      <TableSearchBarComponent />
+      <TableSearchBarComponent onSearch={onSearchSubstrOnRow} />
 
       <div className="table">
         {isLoading && (

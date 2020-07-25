@@ -2,8 +2,20 @@ import React, { useContext } from "react";
 
 import AppContext from "../context/App.context";
 
-const TableSearchBarComponent = () => {
+export interface ITableSearchBarComponent {
+  onSearch: (val: string) => void;
+}
+
+const TableSearchBarComponent = ({ onSearch }: ITableSearchBarComponent) => {
   const { isLoading } = useContext(AppContext);
+
+  const onClickSearchButton = () => {
+    const inputValue = (document.getElementById(
+      "table-search"
+    ) as HTMLInputElement).value;
+    return onSearch(inputValue || "");
+  };
+
   return (
     <div className="table__search-bar">
       <div className="search-bar__container">
@@ -19,6 +31,7 @@ const TableSearchBarComponent = () => {
           <button
             type="button"
             className="btn btn-success"
+            onClick={onClickSearchButton}
             disabled={isLoading}
           >
             Найти
