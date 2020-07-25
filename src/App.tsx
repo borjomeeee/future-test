@@ -21,24 +21,32 @@ export interface IAppInitialState {
   tableItems: ITableItem[];
 }
 
-export type IAppReducerActions =
-  | ReturnType<typeof ACTIONS.loadSmallData>
-  | ReturnType<typeof ACTIONS.loadBigData>
+export type IAppReducerSyncActions =
   | ReturnType<typeof ACTIONS.loadDataAction>
   | ReturnType<typeof ACTIONS.loadDataSuccessAction>
   | ReturnType<typeof ACTIONS.loadDataFailedAction>
   | ReturnType<typeof ACTIONS.clearErrorAction>;
 
-function App() {
-  const [store, dispatch] = useReducerWithThunk<
-    IAppInitialState,
-    IAppReducerActions
-  >(AppReducer, {
-    isLoading: false,
-    error: "",
+export type IAppReducerActions =
+  | ReturnType<typeof ACTIONS.loadSmallData>
+  | ReturnType<typeof ACTIONS.loadBigData>
+  | IAppReducerSyncActions;
 
-    tableItems: [],
-  });
+export type IAppReducerSyncProps = (
+  state: IAppInitialState,
+  action: IAppReducerActions
+) => IAppInitialState;
+
+function App() {
+  const [store, dispatch] = useReducerWithThunk(
+    AppReducer as IAppReducerSyncProps,
+    {
+      isLoading: false,
+      error: "",
+
+      tableItems: [],
+    }
+  );
 
   const { isLoading } = store as IAppInitialState;
 

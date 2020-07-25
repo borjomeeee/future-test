@@ -1,15 +1,23 @@
 import { useReducer } from "react";
+import {
+  IAppInitialState,
+  IAppReducerSyncActions,
+  IAppReducerActions,
+} from "../App";
 
-function useReducerWithThunk<T, U>(
-  reducer: (store: T, action: U) => T,
-  initialState: T
+function useReducerWithThunk(
+  reducer: (
+    store: IAppInitialState,
+    action: IAppReducerActions
+  ) => IAppInitialState,
+  initialState: IAppInitialState
 ) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  let customDispatch = (action: U) => {
+  let customDispatch = (action: IAppReducerActions) => {
     if (typeof action === "function") {
       action(customDispatch);
     } else {
-      dispatch(action);
+      dispatch(action as IAppReducerSyncActions);
     }
   };
   return [state, customDispatch];

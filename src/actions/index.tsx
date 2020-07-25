@@ -1,7 +1,17 @@
+import { IAppReducerActions } from "../App";
+
 import { ITableItem } from "../models/TableItem.model";
 
-export const loadSmallData = () => async (dispatch: React.Dispatch<any>) => {};
-export const loadBigData = () => async (dispatch: React.Dispatch<any>) => {};
+export type IAsyncAction = (
+  dispatch: React.Dispatch<IAppReducerActions>
+) => void;
+
+export const loadSmallData = (): IAsyncAction => async (
+  _: React.Dispatch<IAppReducerActions>
+) => {};
+export const loadBigData = (): IAsyncAction => async (
+  _: React.Dispatch<IAppReducerActions>
+) => {};
 
 export const loadDataAction = () =>
   ({

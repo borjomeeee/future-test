@@ -1,6 +1,6 @@
-import { IAppInitialState } from "../App";
+import { IAppInitialState, IAppReducerSyncActions } from "../App";
 
-export default (state: IAppInitialState, action: any) => {
+export default (state: IAppInitialState, action: IAppReducerSyncActions) => {
   switch (action.type) {
     default:
       return state;
