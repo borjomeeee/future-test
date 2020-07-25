@@ -7,20 +7,46 @@ export type IAppReducerSyncActions =
   | ReturnType<typeof clearErrorAction>;
 
 export type IAppReducerActions =
-  | ReturnType<typeof loadSmallData>
-  | ReturnType<typeof loadBigData>
+  | ReturnType<typeof loadData>
   | IAppReducerSyncActions;
 
 export type IAsyncAction = (
   dispatch: React.Dispatch<IAppReducerActions>
 ) => void;
 
-export const loadSmallData = (): IAsyncAction => async (
-  _: React.Dispatch<IAppReducerActions>
-) => {};
-export const loadBigData = (): IAsyncAction => async (
-  _: React.Dispatch<IAppReducerActions>
-) => {};
+export const loadData = (url: string): IAsyncAction => async (
+  dispatch: React.Dispatch<IAppReducerActions>
+) => {
+  dispatch(loadDataAction());
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      if (Array.isArray(data)) {
+        const validData = data.map(
+          (item: any) =>
+            ({
+              id: item["id"] || Date.now(),
+              firstName: item["firstName"] || "",
+              lastName: item["lastName"] || "",
+              email: item["email"] || "",
+              phone: item["phone"],
+              address: {
+                streetAddress: item["address"]["streetAddress"] || "",
+                city: item["address"]["city"] || "",
+                state: item["address"]["state"] || "",
+                zip: item["address"]["zip"] || "",
+              },
+              description: item["description"] || "",
+            } as ITableItem)
+        );
+        console.log(validData);
+        dispatch(loadDataSuccessAction(validData));
+      } else {
+        dispatch(loadDataFailedAction("Ошибка обработки данных с сервера"));
+      }
+    })
+    .catch(() => dispatch(loadDataFailedAction("Ошибка загруки данных")));
+};
 
 export const loadDataAction = () =>
   ({
