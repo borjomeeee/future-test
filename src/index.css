@@ -75,7 +75,8 @@
 }
 
 .pagination .pagination__page-link a,
-.pagination .pagination__button a {
+.pagination .pagination__button a,
+.pagination .pagination__break a {
   width: 100%;
   height: 100%;
 

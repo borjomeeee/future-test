@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import TableSearchBarComponent from "./TableSearchBar.component";
 import TablePaginatorComponent from "./TablePaginator.component";
@@ -14,9 +14,24 @@ const TableComponent = () => {
   const { isLoading, tableItems } = useContext(AppContext);
   const { numItems } = useContext(TableContext);
 
+  const [currPage, setCurrPage] = useState(0);
+
   const renderTableItem = (item: ITableItem) => {
     return <TableItemComponent {...item} />;
   };
+
+  const getCurrPageTableItems = () => {
+    const currItems = [];
+    for (let i = 0; i < numItems; i++) {
+      if (tableItems.length > currPage * numItems + i) {
+        currItems.push(tableItems[currPage * numItems + i]);
+      }
+    }
+
+    return currItems;
+  };
+
+  const numPages = numItems === 0 ? 0 : Math.ceil(tableItems.length / numItems);
 
   return (
     <div className="table">
@@ -46,13 +61,17 @@ const TableComponent = () => {
               <th scope="col">phone</th>
             </tr>
           </thead>
-          <tbody>{tableItems.map(renderTableItem)}</tbody>
+          <tbody>{getCurrPageTableItems().map(renderTableItem)}</tbody>
         </table>
       </div>
 
       <TableSubDataComponent />
 
-      <TablePaginatorComponent />
+      <TablePaginatorComponent
+        currPage={currPage}
+        numPages={numPages}
+        setNumPage={setCurrPage}
+      />
     </div>
   );
 };

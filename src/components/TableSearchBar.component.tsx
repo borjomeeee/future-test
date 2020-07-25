@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import AppContext from "../context";
+import AppContext from "../context/App.context";
 
 const TableSearchBarComponent = () => {
   const { isLoading } = useContext(AppContext);
