@@ -1,26 +1,35 @@
 import React from "react";
+import { ITableItem } from "../models/TableItem.model";
 
-const TableSubDataComponent = () => {
+const TableSubDataComponent = ({
+  firstName,
+  lastName,
+  description,
+  address,
+}: ITableItem) => {
+  const { streetAddress, city, state, zip } = address;
   return (
     <div className="table__sub-data">
       <div className="card">
         <div className="card-body">
-          <h5 className="card-title">Выбран пользователь: Sue Corson</h5>
+          <h5 className="card-title">
+            Выбран пользователь: {`${firstName} ${lastName}`}
+          </h5>
           <h6 className="card-subtitle mb-2 text-muted">
-            Описание: et lacus magna dolor...
+            Описание: {description || "-"}
           </h6>
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
-              Адрес проживания: <b>9792 Mattis Ct</b>
+              Адрес проживания: <b>{streetAddress || "-"}</b>
             </li>
             <li className="list-group-item">
-              Город: <b>Waukesha</b>
+              Город: <b>{city || ""}</b>
             </li>
             <li className="list-group-item">
-              Провинция/штат: <b>WI</b>
+              Провинция/штат: <b>{state || ""}</b>
             </li>
             <li className="list-group-item">
-              Индекс: <b>22178</b>
+              Индекс: <b>{zip || ""}</b>
             </li>
           </ul>
         </div>

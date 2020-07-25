@@ -1,22 +1,27 @@
 import React, { useContext, useState, useEffect } from "react";
 
-import TableSearchBarComponent from "./TableSearchBar.component";
+import TableTopBarComponent from "./TableTopBar.component";
 import TablePaginatorComponent from "./TablePaginator.component";
 import TableSubDataComponent from "./TableSubData.component";
 import TableItemComponent from "./TableItem.component";
+import TableLoadingComponent from "./TableLoading.component";
+import TableHeadComponent from "./TableHead.component";
+import ModalComponent from "./Modal.component";
+import TableAddFormComponent from "./TableAddForm.component";
 
 import AppContext from "../context/App.context";
 import TableContext, { ITableCol } from "../context/Table.context";
 
 import { ITableItem } from "../models/TableItem.model";
-import { FilterDownIcon, FilterUpIcon } from "../icons";
 
 const TableComponent = () => {
   const { isLoading, tableItems } = useContext(AppContext);
   const { numItems, cols } = useContext(TableContext);
 
+  const [addTableItemFormVisible, setAddTableItemFormVisible] = useState(false);
   const [currItems, setCurrItems] = useState<ITableItem[]>([]);
   const [currPage, setCurrPage] = useState(0);
+  const [currItem, setCurrItem] = useState<ITableItem | null>(null);
 
   const [filterCol, setFilterCol] = useState<keyof ITableItem | null>(null);
   const [filterColState, setFilterColState] = useState(false);
@@ -25,10 +30,22 @@ const TableComponent = () => {
     setCurrItems(tableItems);
 
     setFilterCol(null);
+    setCurrItem(null);
   }, [tableItems]);
 
+  const onClickTableItem = (item: ITableItem) => {
+    setCurrItem(item);
+  };
+
   const renderTableItem = (item: ITableItem, key: number) => {
-    return <TableItemComponent key={key} {...item} />;
+    return (
+      <TableItemComponent
+        key={key}
+        {...item}
+        isSelected={item.id === currItem?.id}
+        onClickItem={() => onClickTableItem(item)}
+      />
+    );
   };
 
   const getCurrPageTableItems = () => {
@@ -68,58 +85,52 @@ const TableComponent = () => {
     setFilterCol(null);
   };
 
-  const renderTableCol = (col: ITableCol) => {
-    return (
-      <th
-        key={col.key}
-        className="table__col"
-        scope="col"
-        onClick={() => onTableColLabelClick(col.key)}
-      >
-        {col.label}
-        {filterCol === col.key &&
-          (filterColState ? <FilterDownIcon /> : <FilterUpIcon />)}
-      </th>
-    );
+  const onToggleVisibleAddForm = () => {
+    setAddTableItemFormVisible(!addTableItemFormVisible);
   };
 
   const numPages = numItems === 0 ? 0 : Math.ceil(tableItems.length / numItems);
 
   return (
     <div className="table">
-      <TableSearchBarComponent onSearch={onSearchSubstrOnRow} />
+      <TableTopBarComponent
+        onSearch={onSearchSubstrOnRow}
+        onAddItem={onToggleVisibleAddForm}
+      />
 
-      <div className="table">
-        {isLoading && (
-          <div className="table__loader loader">
-            <div className="loader__container">
-              <div className="spinner-border text-primary" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-            </div>
-          </div>
-        )}
-        <table
-          className={`table__container ${
-            isLoading ? "table__container-loading" : ""
-          }`}
-        >
-          <thead>
-            <tr className="table__row table__row-first">
-              {cols.map(renderTableCol)}
-            </tr>
-          </thead>
+      <div
+        className={`table__container ${
+          isLoading ? "table__container-loading" : ""
+        }`}
+      >
+        {isLoading && <TableLoadingComponent />}
+        <table className="table__content">
+          <TableHeadComponent
+            onClick={onTableColLabelClick}
+            filteredCol={filterCol}
+            filterState={filterColState}
+          />
+
           <tbody>{getCurrPageTableItems().map(renderTableItem)}</tbody>
         </table>
       </div>
 
-      <TableSubDataComponent />
+      {currItem !== null && <TableSubDataComponent {...currItem} />}
 
       <TablePaginatorComponent
         currPage={currPage}
         numPages={numPages}
         setNumPage={setCurrPage}
       />
+
+      {addTableItemFormVisible && (
+        <ModalComponent
+          title="Добавить TableItem"
+          onClose={() => setAddTableItemFormVisible(false)}
+        >
+          <TableAddFormComponent onSubmit={() => undefined} />
+        </ModalComponent>
+      )}
     </div>
   );
 };
