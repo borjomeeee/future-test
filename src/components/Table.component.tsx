@@ -5,12 +5,14 @@ import TablePaginatorComponent from "./TablePaginator.component";
 import TableSubDataComponent from "./TableSubData.component";
 import TableItemComponent from "./TableItem.component";
 
-import AppContext from "../context";
+import AppContext from "../context/App.context";
+import TableContext from "../context/Table.context";
 
 import { ITableItem } from "../models/TableItem.model";
 
 const TableComponent = () => {
   const { isLoading, tableItems } = useContext(AppContext);
+  const { numItems } = useContext(TableContext);
 
   const renderTableItem = (item: ITableItem) => {
     return <TableItemComponent {...item} />;

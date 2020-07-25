@@ -4,7 +4,7 @@ import AppHeaderComponent from "./components/AppHeader.component";
 import UtilsPanelComponent from "./components/UtilsPanel.component";
 import TableComponent from "./components/Table.component";
 
-import AppContext from "./context";
+import AppContext from "./context/App.context";
 
 import { ITableItem } from "./models/TableItem.model";
 
@@ -15,6 +15,7 @@ import useReducerWithThunk, {
 } from "./hooks/useReducerWithThunk.hook";
 
 import AppReducer from "./reducer";
+import TableContext from "./context/Table.context";
 
 export interface IAppInitialState {
   isLoading: boolean;
@@ -78,7 +79,9 @@ function App() {
         <div className="container">
           <UtilsPanelComponent />
 
-          <TableComponent />
+          <TableContext.Provider value={{ numItems: 40 }}>
+            <TableComponent />
+          </TableContext.Provider>
         </div>
       </div>
     </AppContext.Provider>
