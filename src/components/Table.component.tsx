@@ -64,6 +64,8 @@ const TableComponent = () => {
         cols.some((col: ITableCol) => item[col.key].toString().startsWith(str))
       )
     );
+
+    setFilterCol(null);
   };
 
   const renderTableCol = (col: ITableCol) => {
