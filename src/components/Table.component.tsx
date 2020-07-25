@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import TableSearchBarComponent from "./TableSearchBar.component";
 import TablePaginatorComponent from "./TablePaginator.component";
@@ -6,29 +6,71 @@ import TableSubDataComponent from "./TableSubData.component";
 import TableItemComponent from "./TableItem.component";
 
 import AppContext from "../context/App.context";
-import TableContext from "../context/Table.context";
+import TableContext, { ITableCol } from "../context/Table.context";
 
 import { ITableItem } from "../models/TableItem.model";
+import { FilterDownIcon, FilterUpIcon } from "../icons";
 
 const TableComponent = () => {
   const { isLoading, tableItems } = useContext(AppContext);
-  const { numItems } = useContext(TableContext);
+  const { numItems, cols } = useContext(TableContext);
 
+  const [currItems, setCurrItems] = useState<ITableItem[]>([]);
   const [currPage, setCurrPage] = useState(0);
 
-  const renderTableItem = (item: ITableItem) => {
-    return <TableItemComponent {...item} />;
+  const [filterCol, setFilterCol] = useState<keyof ITableItem | null>(null);
+  const [filterColState, setFilterColState] = useState(false);
+
+  useEffect(() => {
+    setCurrItems(tableItems);
+
+    setFilterCol(null);
+  }, [tableItems]);
+
+  const renderTableItem = (item: ITableItem, key: number) => {
+    return <TableItemComponent key={key} {...item} />;
   };
 
   const getCurrPageTableItems = () => {
-    const currItems = [];
+    const tmpItems = new Array<ITableItem>(numItems);
     for (let i = 0; i < numItems; i++) {
-      if (tableItems.length > currPage * numItems + i) {
-        currItems.push(tableItems[currPage * numItems + i]);
+      if (currItems.length > currPage * numItems + i) {
+        tmpItems[i] = currItems[currPage * numItems + i];
       }
     }
 
-    return currItems;
+    return tmpItems;
+  };
+
+  const onTableColLabelClick = (key: keyof ITableItem) => {
+    if (key === filterCol) {
+      setFilterColState(!filterColState);
+      setCurrItems(currItems.reverse());
+    } else {
+      setFilterCol(key);
+      setFilterColState(false);
+
+      setCurrItems(
+        currItems.sort((item1: ITableItem, item2: ITableItem) =>
+          item1[key] > item2[key] ? 1 : item1[key] === item2[key] ? 0 : -1
+        )
+      );
+    }
+  };
+
+  const renderTableCol = (col: ITableCol) => {
+    return (
+      <th
+        key={col.key}
+        className="table__col"
+        scope="col"
+        onClick={() => onTableColLabelClick(col.key)}
+      >
+        {col.label}
+        {filterCol === col.key &&
+          (filterColState ? <FilterDownIcon /> : <FilterUpIcon />)}
+      </th>
+    );
   };
 
   const numPages = numItems === 0 ? 0 : Math.ceil(tableItems.length / numItems);
@@ -49,16 +91,12 @@ const TableComponent = () => {
         )}
         <table
           className={`table__container ${
-            isLoading && "table__container-loading"
+            isLoading ? "table__container-loading" : ""
           }`}
         >
           <thead>
-            <tr>
-              <th scope="col">id</th>
-              <th scope="col">firstName</th>
-              <th scope="col">lastName</th>
-              <th scope="col">email</th>
-              <th scope="col">phone</th>
+            <tr className="table__row table__row-first">
+              {cols.map(renderTableCol)}
             </tr>
           </thead>
           <tbody>{getCurrPageTableItems().map(renderTableItem)}</tbody>

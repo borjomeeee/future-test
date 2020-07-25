@@ -24,6 +24,15 @@
   filter: blur(2px);
 }
 
+.table__col-icon {
+  margin-left: 10px;
+}
+
+.table__row-first .table__col:hover {
+  background-color: #e4e4e4;
+  cursor: pointer;
+}
+
 .table__loader {
   position: absolute;
 

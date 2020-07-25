@@ -34,7 +34,9 @@ const TablePaginatorComponent = ({
         marginPagesDisplayed={3}
         pageRangeDisplayed={7}
         pageClassName={"pagination__page-link"}
-        containerClassName={`pagination ${isLoading && "pagination-disabled"}`}
+        containerClassName={`pagination ${
+          isLoading ? "pagination-disabled" : ""
+        }`}
         activeClassName={"pagination__page-link_active"}
         disableInitialCallback={isLoading}
         disabledClassName={"pagination__button-disabled"}
