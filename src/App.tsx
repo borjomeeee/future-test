@@ -4,13 +4,15 @@ import AppHeaderComponent from "./components/AppHeader.component";
 import UtilsPanelComponent from "./components/UtilsPanel.component";
 import TableComponent from "./components/Table.component";
 
-import LoadingContext from "./context";
+import { LoadingContext, AppContext } from "./context";
 
 import { ITableItem } from "./models/TableItem.model";
 
 import * as ACTIONS from "./actions";
 
-import useReducerWithThunk from "./hooks/useReducerWithThunk.hook";
+import useReducerWithThunk, {
+  IUseReduxWithThunkReturn,
+} from "./hooks/useReducerWithThunk.hook";
 
 import AppReducer from "./reducer";
 
@@ -32,14 +34,14 @@ export type IAppReducerActions =
   | ReturnType<typeof ACTIONS.loadBigData>
   | IAppReducerSyncActions;
 
-export type IAppReducerSyncProps = (
+export type IAppReducerProps = (
   state: IAppInitialState,
   action: IAppReducerActions
 ) => IAppInitialState;
 
 function App() {
-  const [store, dispatch] = useReducerWithThunk(
-    AppReducer as IAppReducerSyncProps,
+  const [store, dispatch]: IUseReduxWithThunkReturn = useReducerWithThunk(
+    AppReducer as IAppReducerProps,
     {
       isLoading: false,
       error: "",
@@ -48,19 +50,33 @@ function App() {
     }
   );
 
-  const { isLoading } = store as IAppInitialState;
+  const { isLoading, tableItems, error } = store;
+
+  const loadBigData = () => {
+    dispatch(ACTIONS.loadBigData());
+  };
+
+  const loadSmallData = () => {
+    dispatch(ACTIONS.loadSmallData());
+  };
+
+  const clearError = () => {
+    dispatch(ACTIONS.clearErrorAction());
+  };
 
   return (
     <LoadingContext.Provider value={{ isLoading }}>
-      <div className="content">
-        <AppHeaderComponent />
+      <AppContext.Provider value={{ tableItems, loadBigData, loadSmallData }}>
+        <div className="content">
+          <AppHeaderComponent />
 
-        <div className="container">
-          <UtilsPanelComponent />
+          <div className="container">
+            <UtilsPanelComponent />
 
-          <TableComponent />
+            <TableComponent />
+          </div>
         </div>
-      </div>
+      </AppContext.Provider>
     </LoadingContext.Provider>
   );
 }
