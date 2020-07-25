@@ -19,3 +19,8 @@ export const loadDataFailedAction = (error: string) =>
     type: "LOAD_DATA_FAILED",
     payload: { error },
   } as const);
+
+export const clearErrorAction = () =>
+  ({
+    type: "CLEAR_ERROR",
+  } as const);
