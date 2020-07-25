@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import ReactPaginate from "react-paginate";
 
-import LoadingContext from "../context";
+import AppContext from "../context";
 
 const TablePaginatorComponent = () => {
-  const { isLoading } = useContext(LoadingContext);
+  const { isLoading } = useContext(AppContext);
   return (
     <div className="table__paginator">
       <ReactPaginate

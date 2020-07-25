@@ -4,10 +4,10 @@ import TableSearchBarComponent from "./TableSearchBar.component";
 import TablePaginatorComponent from "./TablePaginator.component";
 import TableSubDataComponent from "./TableSubData.component";
 
-import LoadingContext from "../context";
+import AppContext from "../context";
 
 const TableComponent = () => {
-  const { isLoading } = useContext(LoadingContext);
+  const { isLoading } = useContext(AppContext);
 
   return (
     <div className="table">

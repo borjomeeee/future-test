@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import AppHeaderComponent from "./components/AppHeader.component";
 import UtilsPanelComponent from "./components/UtilsPanel.component";
 import TableComponent from "./components/Table.component";
 
-import { LoadingContext, AppContext } from "./context";
+import AppContext from "./context";
 
 import { ITableItem } from "./models/TableItem.model";
 
@@ -23,20 +23,9 @@ export interface IAppInitialState {
   tableItems: ITableItem[];
 }
 
-export type IAppReducerSyncActions =
-  | ReturnType<typeof ACTIONS.loadDataAction>
-  | ReturnType<typeof ACTIONS.loadDataSuccessAction>
-  | ReturnType<typeof ACTIONS.loadDataFailedAction>
-  | ReturnType<typeof ACTIONS.clearErrorAction>;
-
-export type IAppReducerActions =
-  | ReturnType<typeof ACTIONS.loadSmallData>
-  | ReturnType<typeof ACTIONS.loadBigData>
-  | IAppReducerSyncActions;
-
 export type IAppReducerProps = (
   state: IAppInitialState,
-  action: IAppReducerActions
+  action: ACTIONS.IAppReducerActions
 ) => IAppInitialState;
 
 function App() {
@@ -52,6 +41,13 @@ function App() {
 
   const { isLoading, tableItems, error } = store;
 
+  useEffect(() => {
+    if (error.length > 0) {
+      alert(error);
+      clearError();
+    }
+  }, [error]);
+
   const loadBigData = () => {
     dispatch(ACTIONS.loadBigData());
   };
@@ -65,19 +61,19 @@ function App() {
   };
 
   return (
-    <LoadingContext.Provider value={{ isLoading }}>
-      <AppContext.Provider value={{ tableItems, loadBigData, loadSmallData }}>
-        <div className="content">
-          <AppHeaderComponent />
+    <AppContext.Provider
+      value={{ isLoading, tableItems, loadBigData, loadSmallData }}
+    >
+      <div className="content">
+        <AppHeaderComponent />
 
-          <div className="container">
-            <UtilsPanelComponent />
+        <div className="container">
+          <UtilsPanelComponent />
 
-            <TableComponent />
-          </div>
+          <TableComponent />
         </div>
-      </AppContext.Provider>
-    </LoadingContext.Provider>
+      </div>
+    </AppContext.Provider>
   );
 }
 

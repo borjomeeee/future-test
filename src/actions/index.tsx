@@ -1,6 +1,15 @@
-import { IAppReducerActions } from "../App";
-
 import { ITableItem } from "../models/TableItem.model";
+
+export type IAppReducerSyncActions =
+  | ReturnType<typeof loadDataAction>
+  | ReturnType<typeof loadDataSuccessAction>
+  | ReturnType<typeof loadDataFailedAction>
+  | ReturnType<typeof clearErrorAction>;
+
+export type IAppReducerActions =
+  | ReturnType<typeof loadSmallData>
+  | ReturnType<typeof loadBigData>
+  | IAppReducerSyncActions;
 
 export type IAsyncAction = (
   dispatch: React.Dispatch<IAppReducerActions>

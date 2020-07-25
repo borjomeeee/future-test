@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 
-import LoadingContext from "../context";
+import AppContext from "../context";
 
 const UtilsPanelComponent = () => {
-  const { isLoading } = useContext(LoadingContext);
+  const { isLoading, loadSmallData, loadBigData } = useContext(AppContext);
 
   return (
     <div className="utils-panel">
@@ -12,6 +12,7 @@ const UtilsPanelComponent = () => {
           <button
             type="button"
             className="btn btn-primary"
+            onClick={loadSmallData}
             disabled={isLoading}
           >
             Загрузить мальнький объем данных
@@ -21,6 +22,7 @@ const UtilsPanelComponent = () => {
           <button
             type="button"
             className="btn btn-primary"
+            onClick={loadBigData}
             disabled={isLoading}
           >
             Загрузить большой объем данных

@@ -1,9 +1,8 @@
 import { useReducer } from "react";
-import {
-  IAppInitialState,
-  IAppReducerSyncActions,
-  IAppReducerActions,
-} from "../App";
+
+import { IAppInitialState } from "../App";
+
+import { IAppReducerActions, IAppReducerSyncActions } from "../actions";
 
 export type IUseReduxWithThunkReturn = [
   IAppInitialState,
