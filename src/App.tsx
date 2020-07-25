@@ -7,7 +7,7 @@ import TableComponent from "./components/Table.component";
 import LoadingContext from "./context";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <LoadingContext.Provider value={{ isLoading, setIsLoading }}>

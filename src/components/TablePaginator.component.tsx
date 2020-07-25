@@ -18,7 +18,6 @@ const TablePaginatorComponent = () => {
         marginPagesDisplayed={0}
         pageRangeDisplayed={10}
         pageClassName={"pagination__page-link"}
-        // onPageChange={this.handlePageClick}
         containerClassName={`pagination ${isLoading && "pagination-disabled"}`}
         activeClassName={"pagination__page-link_active"}
         disableInitialCallback={isLoading}
