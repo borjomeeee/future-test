@@ -12,9 +12,32 @@ export interface ITableContext {
   cols: ITableCol[];
 }
 
-const TableContext = createContext<ITableContext>({
-  numItems: 10,
-  cols: [],
-});
+export const TableContextInitialState: ITableContext = {
+  numItems: 40,
+  cols: [
+    {
+      key: "id",
+      label: "Id",
+    },
+    {
+      key: "firstName",
+      label: "FirstName",
+    },
+    {
+      key: "lastName",
+      label: "LastName",
+    },
+    {
+      key: "email",
+      label: "Email",
+    },
+    {
+      key: "phone",
+      label: "Phone",
+    },
+  ],
+};
+
+const TableContext = createContext<ITableContext>(TableContextInitialState);
 
 export default TableContext;

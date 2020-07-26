@@ -5,6 +5,9 @@ import UtilsPanelComponent from "./components/UtilsPanel.component";
 import TableComponent from "./components/Table.component";
 
 import AppContext from "./context/App.context";
+import TableContext, {
+  TableContextInitialState,
+} from "./context/Table.context";
 
 import { ITableItem } from "./models/TableItem.model";
 
@@ -15,7 +18,6 @@ import useReducerWithThunk, {
 } from "./hooks/useReducerWithThunk.hook";
 
 import AppReducer from "./reducer";
-import TableContext from "./context/Table.context";
 
 export interface IAppInitialState {
   isLoading: boolean;
@@ -61,33 +63,7 @@ function App() {
         <div className="container">
           <UtilsPanelComponent />
 
-          <TableContext.Provider
-            value={{
-              numItems: 40,
-              cols: [
-                {
-                  key: "id",
-                  label: "Id",
-                },
-                {
-                  key: "firstName",
-                  label: "FirstName",
-                },
-                {
-                  key: "lastName",
-                  label: "LastName",
-                },
-                {
-                  key: "email",
-                  label: "Email",
-                },
-                {
-                  key: "phone",
-                  label: "Phone",
-                },
-              ],
-            }}
-          >
+          <TableContext.Provider value={TableContextInitialState}>
             <TableComponent />
           </TableContext.Provider>
         </div>
