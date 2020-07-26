@@ -4,6 +4,7 @@ export interface ITableItem {
   lastName: string;
   email: string;
   phone: string;
+
   address: {
     streetAddress: string;
     city: string;

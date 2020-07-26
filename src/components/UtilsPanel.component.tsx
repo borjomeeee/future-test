@@ -2,8 +2,26 @@ import React, { useContext } from "react";
 
 import AppContext from "../context/App.context";
 
+import * as ACTIONS from "../actions";
+
 const UtilsPanelComponent = () => {
-  const { isLoading, loadSmallData, loadBigData } = useContext(AppContext);
+  const { isLoading, dispatch } = useContext(AppContext);
+
+  const loadBigData = () => {
+    dispatch(
+      ACTIONS.loadData(
+        "http://www.filltext.com/?rows=1000&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}"
+      )
+    );
+  };
+
+  const loadSmallData = () => {
+    dispatch(
+      ACTIONS.loadData(
+        "http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}"
+      )
+    );
+  };
 
   return (
     <div className="utils-panel">

@@ -13,33 +13,49 @@ const TableAddFormComponent = ({ onSubmit }: ITableAddFormComponent) => {
   const [
     idInputValue,
     idInputError,
+    setIdInputError,
     setIdInputValue,
     idCheckValid,
   ] = useInput();
   const [
     firstNameInputValue,
     firstNameInputError,
+    ,
     setFirstNameInputValue,
     firstNameCheckValid,
   ] = useInput();
   const [
     lastNameInputValue,
     lastNameInputError,
+    ,
     setLastNameInputValue,
     lastNameCheckValid,
   ] = useInput();
   const [
     emailInputValue,
     emailInputError,
+    ,
     setEmailInputValue,
     emailCheckValid,
   ] = useInput();
   const [
     phoneInputValue,
     phoneInputError,
+    ,
     setPhoneInputValue,
     phoneCheckValid,
   ] = useInput();
+
+  const customCheckValidInputs = (): boolean => {
+    if (idInputValue.indexOf(".") !== -1 || isNaN(+idInputValue)) {
+      setIdInputError("Id должен быть целым числом");
+      return false;
+    } else if (+idInputValue <= 0) {
+      setIdInputError("Id должен быть больше нуля");
+      return false;
+    }
+    return true;
+  };
 
   const onSubmitAddItem = () => {
     if (
@@ -47,9 +63,23 @@ const TableAddFormComponent = ({ onSubmit }: ITableAddFormComponent) => {
       firstNameCheckValid() &&
       lastNameCheckValid() &&
       emailCheckValid() &&
-      phoneCheckValid()
+      phoneCheckValid() &&
+      customCheckValidInputs()
     ) {
-      // onSubmit()
+      onSubmit({
+        id: +idInputValue,
+        firstName: firstNameInputValue,
+        lastName: lastNameInputValue,
+        email: emailInputValue,
+        phone: phoneInputValue,
+        address: {
+          streetAddress: "",
+          state: "",
+          city: "",
+          zip: "",
+        },
+        description: "",
+      });
     }
   };
 

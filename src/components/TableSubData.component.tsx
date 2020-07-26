@@ -23,13 +23,13 @@ const TableSubDataComponent = ({
               Адрес проживания: <b>{streetAddress || "-"}</b>
             </li>
             <li className="list-group-item">
-              Город: <b>{city || ""}</b>
+              Город: <b>{city || "-"}</b>
             </li>
             <li className="list-group-item">
-              Провинция/штат: <b>{state || ""}</b>
+              Провинция/штат: <b>{state || "-"}</b>
             </li>
             <li className="list-group-item">
-              Индекс: <b>{zip || ""}</b>
+              Индекс: <b>{zip || "-"}</b>
             </li>
           </ul>
         </div>

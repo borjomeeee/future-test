@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const useInput = (): [
   string,
   string,
+  (str: string) => void,
   (event: React.ChangeEvent<HTMLInputElement>) => void,
   () => boolean
 ] => {
@@ -25,7 +26,7 @@ const useInput = (): [
     setInputValue(event.target.value);
   };
 
-  return [inputValue, inputError, onChangeValue, checkValid];
+  return [inputValue, inputError, setInputError, onChangeValue, checkValid];
 };
 
 export default useInput;

@@ -13,6 +13,13 @@ export default (
       return { ...state, isLoading: false, tableItems: action.payload.items };
     case "LOAD_DATA_FAILED":
       return { ...state, isLoading: false, error: action.payload.error };
+    case "CLEAR_ERROR":
+      return { ...state, error: "" };
+    case "ADD_TABLE_ITEM":
+      return {
+        ...state,
+        tableItems: [action.payload.item, ...state.tableItems],
+      };
     default:
       return state;
   }

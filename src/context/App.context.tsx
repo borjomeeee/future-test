@@ -1,20 +1,17 @@
 import { createContext } from "react";
-import { ITableItem } from "../models/TableItem.model";
 
-export interface IAppContext {
-  isLoading: boolean;
-  tableItems: ITableItem[];
+import { IAppInitialState } from "../App";
 
-  loadSmallData: () => void;
-  loadBigData: () => void;
-}
+import * as ACTIONS from "../actions";
 
-const AppContext = createContext<IAppContext>({
+const AppContext = createContext<
+  IAppInitialState & { dispatch: (action: ACTIONS.IAppReducerActions) => void }
+>({
   isLoading: false,
-  tableItems: [],
+  error: "",
 
-  loadSmallData: () => undefined,
-  loadBigData: () => undefined,
+  tableItems: [],
+  dispatch: () => undefined,
 });
 
 export default AppContext;

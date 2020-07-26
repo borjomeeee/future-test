@@ -4,6 +4,7 @@ export type IAppReducerSyncActions =
   | ReturnType<typeof loadDataAction>
   | ReturnType<typeof loadDataSuccessAction>
   | ReturnType<typeof loadDataFailedAction>
+  | ReturnType<typeof addTableItemAction>
   | ReturnType<typeof clearErrorAction>;
 
 export type IAppReducerActions =
@@ -62,6 +63,12 @@ export const loadDataFailedAction = (error: string) =>
   ({
     type: "LOAD_DATA_FAILED",
     payload: { error },
+  } as const);
+
+export const addTableItemAction = (item: ITableItem) =>
+  ({
+    type: "ADD_TABLE_ITEM",
+    payload: { item },
   } as const);
 
 export const clearErrorAction = () =>

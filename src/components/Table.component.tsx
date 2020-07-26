@@ -12,10 +12,12 @@ import TableAddFormComponent from "./TableAddForm.component";
 import AppContext from "../context/App.context";
 import TableContext, { ITableCol } from "../context/Table.context";
 
+import * as ACTIONS from "../actions";
+
 import { ITableItem } from "../models/TableItem.model";
 
 const TableComponent = () => {
-  const { isLoading, tableItems } = useContext(AppContext);
+  const { isLoading, tableItems, dispatch } = useContext(AppContext);
   const { numItems, cols } = useContext(TableContext);
 
   const [addTableItemFormVisible, setAddTableItemFormVisible] = useState(false);
@@ -40,12 +42,14 @@ const TableComponent = () => {
 
   const renderTableItem = (item: ITableItem, key: number) => {
     return (
-      <TableItemComponent
-        key={key}
-        {...item}
-        isSelected={item.id === currItem?.id}
-        onClickItem={() => onClickTableItem(item)}
-      />
+      <>
+        <TableItemComponent
+          key={key}
+          {...item}
+          isSelected={item.id === currItem?.id}
+          onClickItem={() => onClickTableItem(item)}
+        />
+      </>
     );
   };
 
@@ -90,6 +94,11 @@ const TableComponent = () => {
     setAddTableItemFormVisible(!addTableItemFormVisible);
   };
 
+  const onAddTableItem = (item: ITableItem) => {
+    dispatch(ACTIONS.addTableItemAction(item));
+    onToggleVisibleAddForm();
+  };
+
   const numPages = numItems === 0 ? 0 : Math.ceil(tableItems.length / numItems);
 
   return (
@@ -130,7 +139,7 @@ const TableComponent = () => {
           title="Добавить TableItem"
           onClose={() => setAddTableItemFormVisible(false)}
         >
-          <TableAddFormComponent onSubmit={() => undefined} />
+          <TableAddFormComponent onSubmit={onAddTableItem} />
         </ModalComponent>
       )}
     </div>
