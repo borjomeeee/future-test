@@ -15,6 +15,7 @@ import TableContext, { ITableCol } from "../context/Table.context";
 import * as ACTIONS from "../actions";
 
 import { ITableItem } from "../models/TableItem.model";
+import TableItemsContainerComponent from "./TableItemsContainer.component";
 
 const TableComponent = () => {
   const { isLoading, tableItems, dispatch } = useContext(AppContext);
@@ -38,29 +39,6 @@ const TableComponent = () => {
 
   const onClickTableItem = (item: ITableItem) => {
     setCurrItem(item);
-  };
-
-  const renderTableItem = (item: ITableItem, key: number) => {
-    return (
-      <React.Fragment key={key}>
-        <TableItemComponent
-          {...item}
-          isSelected={item === currItem}
-          onClickItem={() => onClickTableItem(item)}
-        />
-      </React.Fragment>
-    );
-  };
-
-  const getCurrPageTableItems = () => {
-    const tmpItems = new Array<ITableItem>(numItems);
-    for (let i = 0; i < numItems; i++) {
-      if (currItems.length > currPage * numItems + i) {
-        tmpItems[i] = currItems[currPage * numItems + i];
-      }
-    }
-
-    return tmpItems;
   };
 
   const onTableColLabelClick = (key: keyof ITableItem) => {
@@ -122,7 +100,12 @@ const TableComponent = () => {
             filterState={filterColState}
           />
 
-          <tbody>{getCurrPageTableItems().map(renderTableItem)}</tbody>
+          <TableItemsContainerComponent
+            items={currItems}
+            currPageNum={currPage}
+            currItem={currItem}
+            onClickItem={onClickTableItem}
+          />
         </table>
       </div>
 
