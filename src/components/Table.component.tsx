@@ -3,11 +3,11 @@ import React, { useContext, useState, useEffect } from "react";
 import TableTopBarComponent from "./TableTopBar.component";
 import TablePaginatorComponent from "./TablePaginator.component";
 import TableSubDataComponent from "./TableSubData.component";
-import TableItemComponent from "./TableItem.component";
 import TableLoadingComponent from "./TableLoading.component";
 import TableHeadComponent from "./TableHead.component";
 import ModalComponent from "./Modal.component";
 import TableAddFormComponent from "./TableAddForm.component";
+import TableItemsContainerComponent from "./TableItemsContainer.component";
 
 import AppContext from "../context/App.context";
 import TableContext, { ITableCol } from "../context/Table.context";
@@ -15,7 +15,6 @@ import TableContext, { ITableCol } from "../context/Table.context";
 import * as ACTIONS from "../actions";
 
 import { ITableItem } from "../models/TableItem.model";
-import TableItemsContainerComponent from "./TableItemsContainer.component";
 
 const TableComponent = () => {
   const { isLoading, tableItems, dispatch } = useContext(AppContext);

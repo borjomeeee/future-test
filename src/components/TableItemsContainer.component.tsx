@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 import TableItemComponent from "./TableItem.component";
 
@@ -46,7 +46,11 @@ const TableItemsContainerComponent = ({
     return tmpItems;
   };
 
-  return <tbody>{getCurrPageTableItems().map(renderTableItem)}</tbody>;
+  return (
+    <tbody className="table__items">
+      {getCurrPageTableItems().map(renderTableItem)}
+    </tbody>
+  );
 };
 
 export default TableItemsContainerComponent;
