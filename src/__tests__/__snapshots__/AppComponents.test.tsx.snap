@@ -1,0 +1,216 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<tr
+  class="table__head"
+/>
+`;
+
+exports[`table form render correctly 1`] = `undefined`;
+
+exports[`table render correctly 1`] = `
+<div
+  class="table"
+>
+  <div
+    class="table__top-bar"
+  >
+    <button
+      class="top-bar__add-button btn btn-primary"
+      type="button"
+    >
+      Добавить
+    </button>
+    <div
+      class="top-bar__search-container search-container"
+    >
+      <div
+        class="search-container__container"
+      >
+        <div
+          class="search-container__input-container"
+        >
+          <input
+            class="search-container__input form-control"
+            id="table-search"
+            placeholder="Введите хоть что-то..."
+            type="text"
+          />
+        </div>
+        <div
+          class="search-container__button-container"
+        >
+          <button
+            class="search-container__button btn btn-success"
+            type="button"
+          >
+            Найти
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="table__container"
+  >
+    <table
+      class="table__content "
+    >
+      <thead>
+        <tr
+          class="table__head"
+        />
+      </thead>
+      <tbody>
+        <tr
+          class="table__col "
+        >
+          <th
+            scope="row"
+          >
+            1
+          </th>
+          <td>
+            Имя
+          </td>
+          <td>
+            Фамилия
+          </td>
+          <td>
+            Почта
+          </td>
+          <td>
+            Телефон
+          </td>
+        </tr>
+        <tr
+          class="table__col "
+        >
+          <th
+            scope="row"
+          >
+            1
+          </th>
+          <td>
+            Имя
+          </td>
+          <td>
+            Фамилия
+          </td>
+          <td>
+            Почта
+          </td>
+          <td>
+            Телефон
+          </td>
+        </tr>
+        <tr
+          class="table__col "
+        >
+          <th
+            scope="row"
+          >
+            1
+          </th>
+          <td>
+            Имя
+          </td>
+          <td>
+            Фамилия
+          </td>
+          <td>
+            Почта
+          </td>
+          <td>
+            Телефон
+          </td>
+        </tr>
+        <tr
+          class="table__col "
+        >
+          <th
+            scope="row"
+          >
+            1
+          </th>
+          <td>
+            Имя
+          </td>
+          <td>
+            Фамилия
+          </td>
+          <td>
+            Почта
+          </td>
+          <td>
+            Телефон
+          </td>
+        </tr>
+        <tr
+          class="table__col "
+        >
+          <th
+            scope="row"
+          >
+            1
+          </th>
+          <td>
+            Имя
+          </td>
+          <td>
+            Фамилия
+          </td>
+          <td>
+            Почта
+          </td>
+          <td>
+            Телефон
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    class="table__pagination pagination"
+  >
+    <ul
+      class="pagination__container "
+    >
+      <li
+        class="pagination__button pagination__button_disabled"
+      >
+        <a
+          aria-disabled="true"
+          role="button"
+          tabindex="0"
+        >
+          Назад
+        </a>
+      </li>
+      <li
+        class="pagination__page-link pagination__page-link_active"
+      >
+        <a
+          aria-current="page"
+          aria-label="Page 1 is your current page"
+          role="button"
+          tabindex="0"
+        >
+          1
+        </a>
+      </li>
+      <li
+        class="pagination__button pagination__button_disabled"
+      >
+        <a
+          aria-disabled="true"
+          role="button"
+          tabindex="0"
+        >
+          Вперед
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;

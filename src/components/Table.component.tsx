@@ -42,14 +42,13 @@ const TableComponent = () => {
 
   const renderTableItem = (item: ITableItem, key: number) => {
     return (
-      <>
+      <React.Fragment key={key}>
         <TableItemComponent
-          key={key}
           {...item}
           isSelected={item.id === currItem?.id}
           onClickItem={() => onClickTableItem(item)}
         />
-      </>
+      </React.Fragment>
     );
   };
 
