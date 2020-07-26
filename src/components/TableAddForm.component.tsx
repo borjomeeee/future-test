@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import InputMask from "react-input-mask";
 
 import { ITableItem } from "../models/TableItem.model";
@@ -43,10 +43,38 @@ const TableAddFormComponent = ({ onSubmit }: ITableAddFormComponent) => {
   const [
     phoneInputValue,
     phoneInputError,
-    ,
+    setPhoneInputError,
     setPhoneInputValue,
     phoneCheckValid,
   ] = useInput();
+
+  const [submitButtonVisible, setSubmitButtonVisible] = useState(false);
+
+  useEffect(() => {
+    if (
+      idInputValue.length !== 0 &&
+      firstNameInputValue.length !== 0 &&
+      lastNameInputValue.length !== 0 &&
+      emailInputValue.length !== 0 &&
+      phoneInputValue.length !== 0
+    ) {
+      if (!submitButtonVisible) {
+        setSubmitButtonVisible(true);
+      }
+    } else {
+      if (submitButtonVisible) {
+        setSubmitButtonVisible(false);
+      }
+    }
+  }, [
+    idInputValue,
+    firstNameInputValue,
+    lastNameInputValue,
+    emailInputValue,
+    phoneInputValue,
+
+    submitButtonVisible,
+  ]);
 
   const customCheckValidInputs = (): boolean => {
     if (idInputValue.indexOf(".") !== -1 || isNaN(+idInputValue)) {
@@ -63,6 +91,11 @@ const TableAddFormComponent = ({ onSubmit }: ITableAddFormComponent) => {
       )
     ) {
       setEmailInputError("Введите валидный email");
+      return false;
+    }
+
+    if (phoneInputValue.length !== 13) {
+      setPhoneInputError("Введите валидный номер");
       return false;
     }
 
@@ -155,6 +188,7 @@ const TableAddFormComponent = ({ onSubmit }: ITableAddFormComponent) => {
           <LabeledInputComponent error={phoneInputError} label="Phone">
             <InputMask
               mask="(999)999-9999"
+              maskChar={null}
               type="text"
               className="form__input form-control"
               id="inputPhone"
@@ -166,12 +200,14 @@ const TableAddFormComponent = ({ onSubmit }: ITableAddFormComponent) => {
         </div>
       </div>
 
-      <button
-        className="form__submit btn btn-primary mt-4"
-        onClick={onSubmitAddItem}
-      >
-        Добавить
-      </button>
+      {submitButtonVisible && (
+        <button
+          className="form__submit btn btn-primary mt-4"
+          onClick={onSubmitAddItem}
+        >
+          Добавить
+        </button>
+      )}
     </div>
   );
 };
