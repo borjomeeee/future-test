@@ -45,7 +45,7 @@ const TableComponent = () => {
       <React.Fragment key={key}>
         <TableItemComponent
           {...item}
-          isSelected={item.id === currItem?.id}
+          isSelected={item === currItem}
           onClickItem={() => onClickTableItem(item)}
         />
       </React.Fragment>
