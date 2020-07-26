@@ -83,11 +83,23 @@
   display: flex;
   justify-content: center;
 
+  position: relative;
+
   &__container {
     display: flex;
 
     justify-content: center;
     align-items: center;
+  }
+
+  &__empty {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    z-index: 1000;
   }
 
   [role="button"] {
@@ -159,13 +171,14 @@
   &__container_disabled {
     .pagination {
       &__page-link,
+      &__break,
       &__button {
         background-color: #e4e4e4;
         border-color: #c4c4c4;
 
         a {
           cursor: default;
-          color: #000;
+          color: #000 !important;
         }
       }
     }

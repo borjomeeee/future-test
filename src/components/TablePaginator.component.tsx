@@ -19,12 +19,16 @@ const TablePaginatorComponent = ({
   const { isLoading } = useContext(AppContext);
   return (
     <div className="table__pagination pagination">
+      {isLoading && <div className="pagination__empty"></div>}
+
       <ReactPaginate
         pageCount={numPages}
         initialPage={currPage}
-        onPageChange={({ selected }: { selected: number }) =>
-          setNumPage(selected)
-        }
+        onPageChange={({ selected }: { selected: number }) => {
+          if (!isLoading) {
+            setNumPage(selected);
+          }
+        }}
         previousLabel={"Назад"}
         previousClassName={`pagination__button`}
         nextLabel={"Вперед"}
