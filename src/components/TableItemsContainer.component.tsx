@@ -46,11 +46,7 @@ const TableItemsContainerComponent = ({
     return tmpItems;
   };
 
-  return (
-    <div className="table__items">
-      <tbody>{getCurrPageTableItems().map(renderTableItem)}</tbody>
-    </div>
-  );
+  return <tbody>{getCurrPageTableItems().map(renderTableItem)}</tbody>;
 };
 
 export default TableItemsContainerComponent;
