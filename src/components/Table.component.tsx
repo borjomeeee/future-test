@@ -86,6 +86,7 @@ const TableComponent = () => {
       )
     );
 
+    setCurrPage(0);
     setFilterCol(null);
   };
 
