@@ -1,8 +1,10 @@
 import React from "react";
+import InputMask from "react-input-mask";
 
 import { ITableItem } from "../models/TableItem.model";
 
 import useInput from "../hooks/useInput.hook";
+
 import LabeledInputComponent from "./LabeledInput.component";
 
 export interface ITableAddFormComponent {
@@ -34,7 +36,7 @@ const TableAddFormComponent = ({ onSubmit }: ITableAddFormComponent) => {
   const [
     emailInputValue,
     emailInputError,
-    ,
+    setEmailInputError,
     setEmailInputValue,
     emailCheckValid,
   ] = useInput();
@@ -54,6 +56,16 @@ const TableAddFormComponent = ({ onSubmit }: ITableAddFormComponent) => {
       setIdInputError("Id должен быть больше нуля");
       return false;
     }
+
+    if (
+      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        emailInputValue
+      )
+    ) {
+      setEmailInputError("Введите валидный email");
+      return false;
+    }
+
     return true;
   };
 
@@ -87,69 +99,70 @@ const TableAddFormComponent = ({ onSubmit }: ITableAddFormComponent) => {
     <div className="table__form form">
       <div className="form-row">
         <div className="form__item form-group col-md-2">
-          <LabeledInputComponent
-            type="text"
-            className="form__input form-control"
-            id="inputId"
-            placeholder="Id"
-            value={idInputValue}
-            error={idInputError}
-            onChange={setIdInputValue}
-            label="Id"
-          />
+          <LabeledInputComponent error={idInputError} label="Id">
+            <input
+              type="text"
+              className="form__input form-control"
+              id="inputId"
+              placeholder="Id"
+              value={idInputValue}
+              onChange={setIdInputValue}
+            />
+          </LabeledInputComponent>
         </div>
         <div className="form__item form-group col-md-5">
-          <LabeledInputComponent
-            type="text"
-            className="form__input form-control"
-            id="inputFirstName"
-            placeholder="FirstName"
-            error={firstNameInputError}
-            value={firstNameInputValue}
-            onChange={setFirstNameInputValue}
-            label="FirstName"
-          />
+          <LabeledInputComponent error={firstNameInputError} label="FirstName">
+            <input
+              type="text"
+              className="form__input form-control"
+              id="inputFirstName"
+              placeholder="FirstName"
+              value={firstNameInputValue}
+              onChange={setFirstNameInputValue}
+            />
+          </LabeledInputComponent>
         </div>
 
         <div className="form__item form-group col-md-5">
-          <LabeledInputComponent
-            type="text"
-            className="form__input form-control"
-            id="inputLastName"
-            placeholder="LastName"
-            value={lastNameInputValue}
-            error={lastNameInputError}
-            onChange={setLastNameInputValue}
-            label="LastName"
-          />
+          <LabeledInputComponent error={lastNameInputError} label="LastName">
+            <input
+              type="text"
+              className="form__input form-control"
+              id="inputLastName"
+              placeholder="LastName"
+              value={lastNameInputValue}
+              onChange={setLastNameInputValue}
+            />
+          </LabeledInputComponent>
         </div>
       </div>
 
       <div className="form-row">
         <div className="form__item form-group col-md-6">
-          <LabeledInputComponent
-            type="email"
-            className="form__input form-control"
-            id="inputEmail"
-            placeholder="Email"
-            value={emailInputValue}
-            error={emailInputError}
-            onChange={setEmailInputValue}
-            label="Email"
-          />
+          <LabeledInputComponent error={emailInputError} label="Email">
+            <input
+              type="email"
+              className="form__input form-control"
+              id="inputEmail"
+              placeholder="Email"
+              onChange={setEmailInputValue}
+              value={emailInputValue}
+            />
+          </LabeledInputComponent>
         </div>
 
         <div className="form__item form-group col-md-6">
-          <LabeledInputComponent
-            type="text"
-            className="form__input form-control"
-            id="inputPhone"
-            placeholder="Phone"
-            value={phoneInputValue}
-            error={phoneInputError}
-            onChange={setPhoneInputValue}
-            label="Phone"
-          />
+          <LabeledInputComponent error={phoneInputError} label="Phone">
+            <InputMask
+              mask="(999)999-9999"
+              type="text"
+              className="form__input form-control"
+              id="inputPhone"
+              placeholder="Phone"
+              value={phoneInputValue}
+              onChange={setPhoneInputValue}
+            />
+          </LabeledInputComponent>
         </div>
       </div>
 

@@ -8,12 +8,13 @@ export interface ILabeledInputComponent {
 const LabeledInputComponent = ({
   error,
   label,
-  ...props
-}: React.ComponentProps<"input"> & ILabeledInputComponent) => {
+
+  children,
+}: ILabeledInputComponent & React.Props<"div">) => {
   return (
     <>
       <label htmlFor="inputFirstName">{label}</label>
-      <input {...props} />
+      {children}
 
       {error.length > 0 && <div className="common__error">{error}</div>}
     </>
