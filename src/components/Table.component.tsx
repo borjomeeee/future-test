@@ -98,7 +98,7 @@ const TableComponent = () => {
     onToggleVisibleAddForm();
   };
 
-  const numPages = numItems === 0 ? 0 : Math.ceil(tableItems.length / numItems);
+  const numPages = numItems === 0 ? 0 : Math.ceil(currItems.length / numItems);
 
   return (
     <div className="table">
